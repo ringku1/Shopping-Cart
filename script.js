@@ -30,15 +30,15 @@ function addNewProduct(product) {
   <td><img src="${product.image}" alt="${product.name}" width="50"></td>
   <td>${product.name}</td>
   <td class="price">${product.price}</td>
-  <td class="quantity">1</td>
+  <td class="quantity">${product.quantity}</td>
   <td><button class="removeBtn">Remove</button></td>
   <td><button class="addBtn">[+]</button></td>
   <td><button class="deleteBtn">[-]</button></td>
-  <td class="total">${product.price}</td>
+  <td class="total">${product.total}</td>
   `;
   table.appendChild(tr);
   getTotal();
-  let quantity = 1;
+  let quantity = product.quantity;
   let quantityCell = tr.querySelector(".quantity");
   let totalCell = tr.querySelector(".total");
   let price = parseFloat(product.price);
@@ -47,6 +47,14 @@ function addNewProduct(product) {
     quantity++;
     quantityCell.innerText = quantity;
     totalCell.innerText = quantity * price;
+    let productList = JSON.parse(localStorage.getItem("productList")) || [];
+    productList.forEach(pro => {
+      if (pro.id === product.id) {
+        pro.quantity = (pro.quantity || 1) + 1;
+        pro.total = (pro.total || pro.price) + pro.price;
+      }
+    });
+    localStorage.setItem("productList", JSON.stringify(productList));
     getTotal();
   });
   
@@ -55,6 +63,14 @@ function addNewProduct(product) {
       quantity--;
       quantityCell.innerText = quantity;
       totalCell.innerText = quantity * price;
+    let productList = JSON.parse(localStorage.getItem("productList")) || [];
+    productList.forEach(pro => {
+      if (pro.id === product.id) {
+        pro.quantity = (pro.quantity || 1) - 1;
+        pro.total = (pro.total || pro.price) - pro.price;
+      }
+    });
+    localStorage.setItem("productList", JSON.stringify(productList));  
       getTotal();
     }
     if (quantity === 0){
@@ -84,9 +100,11 @@ addProductForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let name = document.getElementById("prodName").value;
   let price = parseFloat(document.getElementById("prodPrice").value);
+  let quantity = 1;
+  let total = price;
   let image = document.getElementById("prodImage").value;
-  
-  let newProduct = { id: Date.now().toString(), name, price, image };
+
+  let newProduct = { id: Date.now().toString(), name, price, quantity, total, image };
   productList.push(newProduct);
   localStorage.setItem("productList", JSON.stringify(productList));
   addNewProduct(newProduct);
@@ -112,5 +130,9 @@ promo.addEventListener("submit", (e) => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  productList.forEach(addNewProduct);
+  productList = JSON.parse(localStorage.getItem("productList")) || [];
+  productList.forEach(product => {
+    addNewProduct(product);
+  });
+  getTotal();
 });
