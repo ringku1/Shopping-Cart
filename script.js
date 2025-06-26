@@ -44,6 +44,9 @@ function addNewProduct(product) {
   let price = parseFloat(product.price);
   
   tr.querySelector(".addBtn").addEventListener("click", () => {
+    document.querySelector("#msg").innerText = "";
+    dis.innerText = 0;
+    disco = 0;
     quantity++;
     quantityCell.innerText = quantity;
     totalCell.innerText = quantity * price;
@@ -59,6 +62,9 @@ function addNewProduct(product) {
   });
   
   tr.querySelector(".deleteBtn").addEventListener("click", () => {
+    document.querySelector("#msg").innerText = "";
+    dis.innerText = 0;
+    disco = 0;
     if (quantity > 0) {
       quantity--;
       quantityCell.innerText = quantity;
@@ -84,6 +90,9 @@ function addNewProduct(product) {
   });
   
   tr.querySelector(".removeBtn").addEventListener("click", () => {
+    document.querySelector("#msg").innerText = "";
+    dis.innerText = 0;
+    disco = 0;
     quantity = 0;
     quantityCell.innerText = 0;
     totalCell.innerText = 0;
@@ -98,6 +107,9 @@ function addNewProduct(product) {
 }
 addProductForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  document.querySelector("#msg").innerText = "";
+  dis.innerText = 0;
+  disco = 0;
   let name = document.getElementById("prodName").value;
   let price = parseFloat(document.getElementById("prodPrice").value);
   let quantity = 1;
@@ -126,6 +138,7 @@ promo.addEventListener("submit", (e) => {
     final.innerText = total.toFixed(2);
     document.querySelector("#msg").innerText = "Sorry! Wrong code";
   }
+    promo.reset();
     getTotal();
 });
 
