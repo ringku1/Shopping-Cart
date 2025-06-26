@@ -15,12 +15,12 @@ body{
   border-radius: 5px;
   border-color: white;
   color: aliceblue;
-  padding: 2px;
+  padding: 20px;
 }
 #t{
   border-radius: 5px;
   border-color: white;
-  padding: 2px;
+  padding: 15px;
 }
 #costing{
   background-color:cadetblue;
@@ -39,6 +39,6 @@ body{
 #cart{
   background-color: midnightblue;
   color: white;
-  padding: 2px;
+  padding: 10px;
   border-radius: 5px;
 }

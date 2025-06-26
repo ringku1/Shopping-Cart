@@ -3,6 +3,8 @@ let items = document.getElementById("items");
 let cost = document.getElementById("cost");
 let dis = document.getElementById("dis");
 let final = document.getElementById("final");
+let addProductForm = document.getElementById("addProductForm");
+let promo = document.getElementById("promo");
 
 let disco = 0;
 let productList = JSON.parse(localStorage.getItem("productList")) || [];
@@ -78,7 +80,6 @@ function addNewProduct(product) {
     getTotal();
   });
 }
-
 addProductForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let name = document.getElementById("prodName").value;
