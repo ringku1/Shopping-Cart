@@ -99,7 +99,7 @@ promo.addEventListener("submit", (e) => {
     dis.innerText = (total * 0.15).toFixed(2);
     disco = parseFloat(dis.innerText);
     final.innerText = (total - disco).toFixed(2);
-    document.querySelector("#msg").innerText = "Congratulations! You cracked the promo offer!";
+    document.querySelector("#msg").innerText = "Congratulations! You've cracked the promo offer!";
   } 
   else {
     dis.innerText = 0;
